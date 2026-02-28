@@ -11,6 +11,14 @@ import product5 from "@/assets/product5.jpg";
 import product6 from "@/assets/product6.jpg";
 import product7 from "@/assets/product7.jpg";
 import product8 from "@/assets/product8.jpg";
+import product9 from "@/assets/product9.jpg";
+import product10 from "@/assets/product10.jpg";
+import product11 from "@/assets/product11.jpg";
+import product12 from "@/assets/product12.jpg";
+import product13 from "@/assets/product13.jpg";
+import product14 from "@/assets/product14.jpg";
+import product15 from "@/assets/product15.jpg";
+import product16 from "@/assets/product16.jpg";
 
 const WHATSAPP_NUMBER = "258868210962";
 
@@ -31,6 +39,14 @@ const products: Product[] = [
   { id: 6, name: "T-Shirt Verde Classic", price: "1.500 MT", image: product6, category: "T-Shirts" },
   { id: 7, name: "T-Shirt Verde Premium", price: "1.800 MT", image: product7, category: "T-Shirts" },
   { id: 8, name: "T-Shirt Branca Feminina", price: "1.500 MT", image: product8, category: "T-Shirts" },
+  { id: 9, name: "Boné Preto Logo", price: "1.200 MT", image: product9, category: "Acessórios" },
+  { id: 10, name: "Conjunto Preto T-Shirt + Short", price: "4.000 MT", image: product10, category: "Packs" },
+  { id: 11, name: "Conjunto Rosa T-Shirt + Short", price: "4.000 MT", image: product11, category: "Packs" },
+  { id: 12, name: "T-Shirt Preta & Verde Pack", price: "2.800 MT", image: product12, category: "Packs" },
+  { id: 13, name: "Boné Preto Premium", price: "1.500 MT", image: product13, category: "Acessórios" },
+  { id: 14, name: "Hoodie Preto & Branco", price: "3.500 MT", image: product14, category: "Hoodies" },
+  { id: 15, name: "T-Shirt Preta G Logo", price: "1.500 MT", image: product15, category: "T-Shirts" },
+  { id: 16, name: "T-Shirt Preta Feminina", price: "1.500 MT", image: product16, category: "T-Shirts" },
 ];
 
 export default function Index() {

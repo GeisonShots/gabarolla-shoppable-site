@@ -109,8 +109,8 @@ export default function Index() {
       </nav>
 
       {/* HERO */}
-      <section className="relative w-full min-h-fit md:h-[85vh] overflow-hidden">
-        <img src={heroImg} alt="Gabarolla Hero" className="w-full h-auto md:h-full md:w-full object-contain md:object-cover md:object-top" />
+      <section className="relative w-full mt-16 md:h-[85vh] overflow-hidden">
+        <img src={heroImg} alt="Gabarolla Hero" className="w-full h-auto md:h-full object-contain md:object-cover md:object-top" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}

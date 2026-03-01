@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,7 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { X, Plus, LogOut, Eye, EyeOff } from "lucide-react";
+import { X, Plus, LogOut, Eye, EyeOff, Upload, ImageIcon } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/logo.png";
 
@@ -26,7 +26,11 @@ export default function Admin() {
   const queryClient = useQueryClient();
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: "", price: "", category: "T-Shirts", image_url: "" });
+  const [form, setForm] = useState({ name: "", price: "", category: "T-Shirts" });
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["admin-products"],
@@ -41,8 +45,35 @@ export default function Admin() {
     enabled: isAdmin,
   });
 
+  const uploadImage = async (file: File): Promise<string> => {
+    const ext = file.name.split(".").pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${ext}`;
+    const { error } = await supabase.storage
+      .from("product-images")
+      .upload(fileName, file, { cacheControl: "3600", upsert: false });
+    if (error) throw error;
+    const { data } = supabase.storage.from("product-images").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
   const saveMutation = useMutation({
-    mutationFn: async (product: Partial<Product>) => {
+    mutationFn: async () => {
+      setUploading(true);
+      let imageUrl = editingId
+        ? products.find((p) => p.id === editingId)?.image_url || null
+        : null;
+
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile);
+      }
+
+      const product = {
+        name: form.name,
+        price: form.price,
+        category: form.category,
+        image_url: imageUrl,
+      };
+
       if (editingId) {
         const { error } = await supabase.from("products").update(product).eq("id", editingId);
         if (error) throw error;
@@ -55,8 +86,12 @@ export default function Admin() {
       queryClient.invalidateQueries({ queryKey: ["admin-products"] });
       resetForm();
       toast({ title: editingId ? "Produto actualizado" : "Produto adicionado" });
+      setUploading(false);
     },
-    onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
+    onError: (e: Error) => {
+      toast({ title: "Erro", description: e.message, variant: "destructive" });
+      setUploading(false);
+    },
   });
 
   const deleteMutation = useMutation({
@@ -79,25 +114,33 @@ export default function Admin() {
   });
 
   const resetForm = () => {
-    setForm({ name: "", price: "", category: "T-Shirts", image_url: "" });
+    setForm({ name: "", price: "", category: "T-Shirts" });
+    setImageFile(null);
+    setImagePreview(null);
     setEditingId(null);
     setShowForm(false);
   };
 
   const startEdit = (p: Product) => {
-    setForm({ name: p.name, price: p.price, category: p.category, image_url: p.image_url || "" });
+    setForm({ name: p.name, price: p.price, category: p.category });
+    setImagePreview(p.image_url);
+    setImageFile(null);
     setEditingId(p.id);
     setShowForm(true);
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => setImagePreview(reader.result as string);
+    reader.readAsDataURL(file);
+  };
+
   const handleSave = () => {
     if (!form.name || !form.price) return;
-    saveMutation.mutate({
-      name: form.name,
-      price: form.price,
-      category: form.category,
-      image_url: form.image_url || null,
-    });
+    saveMutation.mutate();
   };
 
   if (loading) return <div className="min-h-screen bg-background flex items-center justify-center text-foreground">A carregar...</div>;
@@ -153,12 +196,33 @@ export default function Admin() {
                 <Input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="bg-secondary border-border text-foreground" />
               </div>
               <div>
-                <Label className="text-muted-foreground font-body text-sm">URL da Imagem</Label>
-                <Input value={form.image_url} onChange={(e) => setForm({ ...form, image_url: e.target.value })} className="bg-secondary border-border text-foreground" />
+                <Label className="text-muted-foreground font-body text-sm">Imagem do Produto</Label>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="w-full mt-1 border border-dashed border-border rounded-lg p-4 flex flex-col items-center gap-2 hover:border-primary/50 transition-colors bg-secondary"
+                >
+                  {imagePreview ? (
+                    <img src={imagePreview} alt="Preview" className="w-20 h-20 object-cover rounded" />
+                  ) : (
+                    <ImageIcon size={32} className="text-muted-foreground" />
+                  )}
+                  <span className="text-sm text-muted-foreground font-body flex items-center gap-1">
+                    <Upload size={14} />
+                    {imageFile ? imageFile.name : "Carregar imagem"}
+                  </span>
+                </button>
               </div>
             </div>
-            <Button onClick={handleSave} disabled={saveMutation.isPending} className="font-display tracking-wider">
-              {saveMutation.isPending ? "A guardar..." : "Guardar"}
+            <Button onClick={handleSave} disabled={saveMutation.isPending || uploading} className="font-display tracking-wider">
+              {uploading ? "A enviar imagem..." : saveMutation.isPending ? "A guardar..." : "Guardar"}
             </Button>
           </div>
         )}
@@ -171,7 +235,13 @@ export default function Admin() {
           <div className="space-y-3">
             {products.map((p) => (
               <div key={p.id} className="bg-card border border-border rounded-lg p-4 flex items-center gap-4">
-                {p.image_url && <img src={p.image_url} alt={p.name} className="w-14 h-14 object-cover rounded" />}
+                {p.image_url ? (
+                  <img src={p.image_url} alt={p.name} className="w-14 h-14 object-cover rounded" />
+                ) : (
+                  <div className="w-14 h-14 bg-secondary rounded flex items-center justify-center">
+                    <ImageIcon size={20} className="text-muted-foreground" />
+                  </div>
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="font-body text-foreground text-sm truncate">{p.name}</p>
                   <p className="text-primary font-display text-sm">{p.price}</p>

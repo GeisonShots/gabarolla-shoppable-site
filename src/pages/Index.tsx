@@ -116,7 +116,7 @@ export default function Index() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bottom-12 left-0 right-0 text-center"
+          className="absolute bottom-4 md:bottom-12 left-0 right-0 text-center"
         >
           <a
             href="#produtos"

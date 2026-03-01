@@ -31,22 +31,22 @@ interface Product {
 }
 
 const products: Product[] = [
-{ id: 1, name: "T-Shirt Branca Classic", price: "1.500 MT", image: product1, category: "T-Shirts" },
-{ id: 2, name: "Hoodie Preto Logo", price: "3.500 MT", image: product2, category: "Hoodies" },
-{ id: 3, name: "Gorro + T-Shirt Pack", price: "2.000 MT", image: product3, category: "Acessórios" },
-{ id: 4, name: "Collection Pack", price: "5.000 MT", image: product4, category: "Packs" },
-{ id: 5, name: "T-Shirt Preta Minimal", price: "1.500 MT", image: product5, category: "T-Shirts" },
-{ id: 6, name: "T-Shirt Verde Classic", price: "1.500 MT", image: product6, category: "T-Shirts" },
-{ id: 7, name: "T-Shirt Verde Premium", price: "1.800 MT", image: product7, category: "T-Shirts" },
-{ id: 8, name: "T-Shirt Branca Feminina", price: "1.500 MT", image: product8, category: "T-Shirts" },
-{ id: 9, name: "Boné Preto Logo", price: "1.200 MT", image: product9, category: "Acessórios" },
-{ id: 10, name: "Conjunto Preto T-Shirt + Short", price: "4.000 MT", image: product10, category: "Packs" },
-{ id: 11, name: "Conjunto Rosa T-Shirt + Short", price: "4.000 MT", image: product11, category: "Packs" },
-{ id: 12, name: "T-Shirt Preta & Verde Pack", price: "2.800 MT", image: product12, category: "Packs" },
-{ id: 13, name: "Boné Preto Premium", price: "1.500 MT", image: product13, category: "Acessórios" },
-{ id: 14, name: "Hoodie Preto & Branco", price: "3.500 MT", image: product14, category: "Hoodies" },
-{ id: 15, name: "T-Shirt Preta G Logo", price: "1.500 MT", image: product15, category: "T-Shirts" },
-{ id: 16, name: "T-Shirt Preta Feminina", price: "1.500 MT", image: product16, category: "T-Shirts" }];
+  { id: 1, name: "T-Shirt Branca Classic", price: "1.500 MT", image: product1, category: "T-Shirts" },
+  { id: 2, name: "Hoodie Preto Logo", price: "3.500 MT", image: product2, category: "Hoodies" },
+  { id: 3, name: "Gorro + T-Shirt Pack", price: "2.000 MT", image: product3, category: "Acessórios" },
+  { id: 4, name: "Collection Pack", price: "5.000 MT", image: product4, category: "Packs" },
+  { id: 5, name: "T-Shirt Preta Minimal", price: "1.500 MT", image: product5, category: "T-Shirts" },
+  { id: 6, name: "T-Shirt Verde Classic", price: "1.500 MT", image: product6, category: "T-Shirts" },
+  { id: 7, name: "T-Shirt Verde Premium", price: "1.800 MT", image: product7, category: "T-Shirts" },
+  { id: 8, name: "T-Shirt Branca Feminina", price: "1.500 MT", image: product8, category: "T-Shirts" },
+  { id: 9, name: "Boné Preto Logo", price: "1.200 MT", image: product9, category: "Acessórios" },
+  { id: 10, name: "Conjunto Preto T-Shirt + Short", price: "4.000 MT", image: product10, category: "Packs" },
+  { id: 11, name: "Conjunto Rosa T-Shirt + Short", price: "4.000 MT", image: product11, category: "Packs" },
+  { id: 12, name: "T-Shirt Preta & Verde Pack", price: "2.800 MT", image: product12, category: "Packs" },
+  { id: 13, name: "Boné Preto Premium", price: "1.500 MT", image: product13, category: "Acessórios" },
+  { id: 14, name: "Hoodie Preto & Branco", price: "3.500 MT", image: product14, category: "Hoodies" },
+  { id: 15, name: "T-Shirt Preta G Logo", price: "1.500 MT", image: product15, category: "T-Shirts" },
+  { id: 16, name: "T-Shirt Preta Feminina", price: "1.500 MT", image: product16, category: "T-Shirts" }];
 
 
 export default function Index() {
@@ -65,8 +65,8 @@ export default function Index() {
   const sendWhatsApp = () => {
     const message = encodeURIComponent(
       `Olá Gabarolla! Quero encomendar:\n${cart.
-      map((p, i) => `${i + 1}. ${p.name} — ${p.price}`).
-      join("\n")}\n\nTotal: ${cart.length} item(s)`
+        map((p, i) => `${i + 1}. ${p.name} — ${p.price}`).
+        join("\n")}\n\nTotal: ${cart.length} item(s)`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank");
   };
@@ -89,7 +89,7 @@ export default function Index() {
 
               <ShoppingBag size={22} />
               {cart.length > 0 &&
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-display">
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs w-5 h-5 rounded-full flex items-center justify-center font-display">
                   {cart.length}
                 </span>
               }
@@ -100,7 +100,7 @@ export default function Index() {
           </div>
         </div>
         {mobileMenu &&
-        <div className="md:hidden bg-background border-t border-border px-4 py-4 flex flex-col gap-3">
+          <div className="md:hidden bg-background border-t border-border px-4 py-4 flex flex-col gap-3">
             <a href="#produtos" onClick={() => setMobileMenu(false)} className="text-sm font-body text-muted-foreground">Produtos</a>
             <a href="#sobre" onClick={() => setMobileMenu(false)} className="text-sm font-body text-muted-foreground">Sobre</a>
             <a href="#contacto" onClick={() => setMobileMenu(false)} className="text-sm font-body text-muted-foreground">Contacto</a>
@@ -130,6 +130,17 @@ export default function Index() {
         </motion.div>
       </div>
 
+      {/* MARQUEE BANNER */}
+      <div className="w-full bg-foreground text-background py-3 overflow-hidden border-y border-border">
+        <div className="flex w-max animate-marquee">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <span key={i} className="px-8 font-display text-xl md:text-2xl uppercase tracking-widest whitespace-nowrap flex items-center gap-8">
+              GABAROLLA <span className="text-primary text-sm">✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* PRODUTOS */}
       <section id="produtos" className="max-w-7xl mx-auto px-4 py-20">
         <motion.h2
@@ -142,28 +153,28 @@ export default function Index() {
         </motion.h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {products.map((product, i) =>
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.05 }}
-            className="group bg-card rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors">
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="group bg-card rounded-lg overflow-hidden border border-border hover:border-primary/50 transition-colors">
 
               <div className="aspect-[3/4] overflow-hidden">
                 <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy" />
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy" />
 
               </div>
               <div className="p-3 md:p-4">
                 <h3 className="font-display text-sm md:text-base text-foreground">{product.name}</h3>
                 <p className="text-primary font-display text-lg mt-1">{product.price}</p>
                 <button
-                onClick={() => addToCart(product)}
-                className="mt-3 w-full bg-secondary text-secondary-foreground font-body text-sm py-2.5 rounded hover:bg-primary hover:text-primary-foreground transition-colors">
+                  onClick={() => addToCart(product)}
+                  className="mt-3 w-full bg-secondary text-secondary-foreground font-body text-sm py-2.5 rounded hover:bg-primary hover:text-primary-foreground transition-colors">
 
                   Adicionar
                 </button>
@@ -206,12 +217,12 @@ export default function Index() {
 
       {/* CART DRAWER */}
       {cartOpen &&
-      <div className="fixed inset-0 z-50 flex justify-end">
+        <div className="fixed inset-0 z-50 flex justify-end">
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" onClick={() => setCartOpen(false)} />
           <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          className="relative w-full max-w-md bg-card border-l border-border h-full flex flex-col">
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            className="relative w-full max-w-md bg-card border-l border-border h-full flex flex-col">
 
             <div className="flex items-center justify-between p-5 border-b border-border">
               <h3 className="font-display text-xl text-foreground">Carrinho ({cart.length})</h3>
@@ -221,10 +232,10 @@ export default function Index() {
             </div>
             <div className="flex-1 overflow-y-auto p-5 space-y-3">
               {cart.length === 0 &&
-            <p className="text-muted-foreground font-body text-center mt-10">O carrinho está vazio</p>
-            }
+                <p className="text-muted-foreground font-body text-center mt-10">O carrinho está vazio</p>
+              }
               {cart.map((item, index) =>
-            <div key={index} className="flex items-center gap-3 bg-secondary rounded-lg p-3">
+                <div key={index} className="flex items-center gap-3 bg-secondary rounded-lg p-3">
                   <img src={item.image} alt={item.name} className="w-14 h-14 object-cover rounded" />
                   <div className="flex-1">
                     <p className="text-sm font-body text-foreground">{item.name}</p>
@@ -234,19 +245,19 @@ export default function Index() {
                     <X size={16} />
                   </button>
                 </div>
-            )}
+              )}
             </div>
             {cart.length > 0 &&
-          <div className="p-5 border-t border-border">
+              <div className="p-5 border-t border-border">
                 <button
-              onClick={sendWhatsApp}
-              className="w-full bg-primary text-primary-foreground font-display text-lg py-4 flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors tracking-wider">
+                  onClick={sendWhatsApp}
+                  className="w-full bg-primary text-primary-foreground font-display text-lg py-4 flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors tracking-wider">
 
                   <Send size={20} />
                   Enviar Pedido via WhatsApp
                 </button>
               </div>
-          }
+            }
           </motion.div>
         </div>
       }

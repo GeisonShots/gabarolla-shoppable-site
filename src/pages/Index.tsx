@@ -111,21 +111,24 @@ export default function Index() {
       {/* HERO */}
       <section className="relative w-full mt-16 md:h-[85vh] overflow-hidden">
         <img src={heroImg} alt="Gabarolla Hero" className="w-full h-auto md:h-full object-contain md:object-cover md:object-top" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute bottom-4 md:bottom-12 left-0 right-0 text-center">
+      </section>
 
+      {/* CALL TO ACTION */}
+      <div className="w-full flex justify-center py-8 bg-background">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           <a
             href="#produtos"
-            className="inline-block bg-primary text-primary-foreground font-display text-lg hover:bg-primary/90 transition-colors tracking-wider py-[2px] px-[20px] mx-0 my-0 mb-0">
-
+            className="inline-block bg-primary text-primary-foreground font-display text-lg hover:bg-primary/90 transition-colors tracking-wider py-3 px-8"
+          >
             Ver Colecção
           </a>
         </motion.div>
-      </section>
+      </div>
 
       {/* PRODUTOS */}
       <section id="produtos" className="max-w-7xl mx-auto px-4 py-20">

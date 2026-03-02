@@ -159,7 +159,7 @@ export default function Admin() {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={logo} alt="Gabarolla" className="h-7" />
+          <img src={logo} alt="Gabarolla" className="h-10 md:h-12" />
           <span className="font-display text-sm text-primary">ADMIN</span>
         </div>
         <div className="flex items-center gap-3">

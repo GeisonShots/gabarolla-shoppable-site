@@ -45,7 +45,7 @@ export default function Login() {
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
-          <img src={logo} alt="Gabarolla" className="h-10 mx-auto mb-6" />
+          <img src={logo} alt="Gabarolla" className="h-12 md:h-16 mx-auto mb-6" />
           <h1 className="font-display text-2xl text-foreground">
             {isSignUp ? "CRIAR CONTA" : "ADMIN LOGIN"}
           </h1>

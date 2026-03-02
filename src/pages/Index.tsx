@@ -76,7 +76,7 @@ export default function Index() {
       {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <img src={logo} alt="Gabarolla" className="h-8" />
+          <img src={logo} alt="Gabarolla" className="h-10 md:h-12" />
           <div className="hidden md:flex items-center gap-8">
             <a href="#produtos" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Produtos</a>
             <a href="#sobre" className="text-sm font-body text-muted-foreground hover:text-foreground transition-colors">Sobre</a>
@@ -211,7 +211,7 @@ export default function Index() {
 
       {/* FOOTER */}
       <footer className="border-t border-border py-8 text-center">
-        <img src={logo} alt="Gabarolla" className="h-6 mx-auto mb-3 opacity-60" />
+        <img src={logo} alt="Gabarolla" className="h-10 md:h-12 mx-auto mb-3" />
         <p className="text-muted-foreground text-sm font-body">© 2026 Gabarolla®. Todos os direitos reservados.</p>
       </footer>
 
